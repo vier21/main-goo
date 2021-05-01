@@ -6,8 +6,8 @@ import (
 )
 
 type Booklist struct {
-	judulBuku string `json: "judul"`
-	penulis   string `json: "penulis"`
+	Judul   string `json: "judul"`
+	Penulis string `json: "penulis"`
 }
 
 var ListBuku []Booklist
@@ -20,7 +20,7 @@ func main() {
 		bookRoutes.GET("/", GetBuku)
 		bookRoutes.POST("/", CreateBuku)
 		bookRoutes.PUT("/", UpdateBuku)
-		bookRoutes.PUT("/:judul", DeleteBuku)
+		bookRoutes.DELETE("/:judul", DeleteBuku)
 	}
 	if err := engine.Run(); err != nil {
 		log.Fatal(err.Error())
@@ -60,8 +60,8 @@ func UpdateBuku(c *gin.Context) {
 		return
 	}
 	for i, _ := range ListBuku {
-		ListBuku[i].judulBuku = body.judulBuku
-		ListBuku[i].penulis = body.penulis
+		ListBuku[i].Judul = body.Judul
+		ListBuku[i].Penulis = body.Penulis
 
 		c.JSON(200, gin.H{
 			"error": false,
@@ -73,7 +73,7 @@ func UpdateBuku(c *gin.Context) {
 func DeleteBuku(c *gin.Context) {
 	judul := c.Param("judul")
 	for i, u := range ListBuku {
-		if u.judulBuku == judul {
+		if u.Judul == judul {
 			ListBuku = append(ListBuku[:i], ListBuku[i+1:]...)
 
 			c.JSON(200, gin.H{
