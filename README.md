@@ -1,2 +1,3 @@
 # simple-crud-gin-golang
-im noob
+i am damn noob
+don't judge me :v
